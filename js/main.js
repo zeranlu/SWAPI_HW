@@ -30,29 +30,37 @@ const filmURL = `https://swapi.info/api/films/`;
             79 //grievous
         ];
         const ul =  document.createElement("ul");
+        characterBox.appendChild(ul);
         
-        charID.forEach(id => {
-
-            fetch(`${charURL}${id}`)
+        for (let i = 0; i < charID.length; i++) {
+            
+            fetch(`${charURL}${charID[i]}`)
             .then((res) => res.json())
             .then(character => {
 
                 const li = document.createElement("li");
                 const a = document.createElement("a");
                 a.textContent = character.name;
+                a.href = "#";
                 li.appendChild(a);
                 ul.appendChild(li);
                 
-                characterBox.appendChild(ul)
             })
             .then(() => {
+
+                const links = document.querySelectorAll("#character-box li a");
+
+                links.forEach(link => {
+                    link.addEventListener("click", () => console.log("clicked"))
+                })
+
                 //attach an event listener to each link, calls a new function that makes the second AJAX call
                 // function name is getMovie();
             })
             .catch((error) => {
                 console.error(error)
             })
-        })
+        }
     }
 
     function getMovie() {
