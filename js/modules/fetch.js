@@ -9,9 +9,9 @@ export function fetchRequest() {
 // route 2: get a particular movie
 // https://swapi.info/api/films/0
 
-const loader = document.querySelector("#loader");
-
 const characterBox = document.querySelector("#character-box");
+
+const loader = document.querySelector("#loader");
 
 const charURL = `https://swapi.info/api/people/`;
 
@@ -30,13 +30,13 @@ const charID = [
 
     function getCharacters() {
 
-        loader.classList.toggle("hidden");
-
         const ul =  document.createElement("ul");
         characterBox.appendChild(ul);
         
         for (let i = 0; i < charID.length; i++) {
-            
+
+            loader.classList.toggle("hidden");
+
             fetch(`${charURL}${charID[i]}`)
             .then((res) => res.json())
             .then((character) => {
@@ -65,6 +65,8 @@ const charID = [
                 links.forEach(link => {
                     link.addEventListener("click", getMovies)
                 })
+
+                loader.classList.toggle("hidden");
             })
             .catch((error) => {
                 console.error(error)
