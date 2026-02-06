@@ -9,6 +9,8 @@ export function fetchRequest() {
 // route 2: get a particular movie
 // https://swapi.info/api/films/0
 
+const loader = document.querySelector("#loader");
+
 const characterBox = document.querySelector("#character-box");
 
 const charURL = `https://swapi.info/api/people/`;
@@ -27,6 +29,8 @@ const charID = [
     ];
 
     function getCharacters() {
+
+        loader.classList.toggle("hidden");
 
         const ul =  document.createElement("ul");
         characterBox.appendChild(ul);
@@ -64,6 +68,8 @@ const charID = [
             })
             .catch((error) => {
                 console.error(error)
+
+                characterBox.innerHTML = `<p>apologies, an erroneous connection has been made to the database or there's a problem with your internet connection. Data could not be retrieved. :(</p>`
             })
         }
     }
@@ -101,6 +107,8 @@ const charID = [
         })
         .catch((error) => {
             console.error(error)
+
+            characterBox.innerHTML = `<p>Oops, something went wrong. It may be your internet connection or it might be us. Please try again later.</p>`
         })
 
     }
@@ -137,6 +145,8 @@ const charID = [
         })
         .catch((error) => {
             console.error(error)
+
+            characterBox.innerHTML = `<p>Oops, something went wrong. It may be your internet connection or it might be us. Please try again later.</p>`
         })
     }
 
